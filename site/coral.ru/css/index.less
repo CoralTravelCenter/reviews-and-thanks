@@ -95,8 +95,36 @@
 			content: none!important;
 		}
 	}
+	li.selected span {
+		background-color: transparent!important;
+		color: inherit!important;
+		padding: unset!important;
+		display: unset!important;
+	}
 	.slide.plus {
 		order: 1;
 		margin-left: auto;
+		display: flex;
+		align-items: center;
+		&.open:before {
+			transform: scaleY(-1);
+		}
+		&:before {
+			content: '' !important;
+			width: 1.5em;
+			height: .75em;
+			background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxNyAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1LjUgMUw4LjUgOEwxLjUgMC45OTk5OTkiIHN0cm9rZT0iIzg4ODg4OCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==") center no-repeat;
+			background-size: contain;
+			.transit(transform);
+		}
+	}
+	ul.slideContent {
+		padding-left: 1.5em;
+		li {
+			line-height: 1.4;
+		}
+		&[style*=block] ~ .d-flex .slide.plus {
+			display: none;
+		}
 	}
 }

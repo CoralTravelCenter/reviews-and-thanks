@@ -309,7 +309,39 @@
 [data-module="leftSiblingMenu"] .minus:before {
   content: none!important;
 }
+[data-module="leftSiblingMenu"] li.selected span {
+  background-color: transparent!important;
+  color: inherit!important;
+  padding: unset!important;
+  display: unset!important;
+}
 [data-module="leftSiblingMenu"] .slide.plus {
   order: 1;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+[data-module="leftSiblingMenu"] .slide.plus.open:before {
+  transform: scaleY(-1);
+}
+[data-module="leftSiblingMenu"] .slide.plus:before {
+  content: '' !important;
+  width: 1.5em;
+  height: 0.75em;
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxNyAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1LjUgMUw4LjUgOEwxLjUgMC45OTk5OTkiIHN0cm9rZT0iIzg4ODg4OCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==") center no-repeat;
+  background-size: contain;
+  -webkit-transition: transform 0.5s;
+  -moz-transition: transform 0.5s;
+  -ms-transition: transform 0.5s;
+  -o-transition: transform 0.5s;
+  transition: transform 0.5s;
+}
+[data-module="leftSiblingMenu"] ul.slideContent {
+  padding-left: 1.5em;
+}
+[data-module="leftSiblingMenu"] ul.slideContent li {
+  line-height: 1.4;
+}
+[data-module="leftSiblingMenu"] ul.slideContent[style*=block] ~ .d-flex .slide.plus {
+  display: none;
 }

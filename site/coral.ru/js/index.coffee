@@ -52,7 +52,7 @@ String::zeroPad = (len, c) ->
     s + @
 Number::zeroPad = (len, c) -> String(@).zeroPad len, c
 
-window.DEBUG = 'APP NAME'
+#window.DEBUG = 'APP NAME'
 
 ASAP ->
-
+    $(document).on 'click', '.leftSiblingMenu .slide.plus', () -> $(this).toggleClass('open')
