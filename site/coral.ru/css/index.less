@@ -30,14 +30,73 @@
 	h1,h2,h3,h4,h5,h6 {
 		font-weight: bold;
 	}
-	section {
-		> .contenu {
 
+	.kv {
+		.proportional(1370/495);
+		background: url("../iii/kv-desktop.jpg") center no-repeat;
+		background-size: cover;
+		border-radius: 1.5em;
+		@media screen and (max-width: @mobile-breakpoint) {
+			.proportional(720/864);
+			background-image: url(../iii/kv-mobile.jpg);
 		}
 
-		&.intro {
-
+		> div {
+			.flex-center;
+			.silly-b2c-font-size(@max-font-size: 40px, @mobile-based-font-size: 48px);
+			line-height: 1.2;
+			font-weight: bold;
+			color: black;
+			padding: 5% 60% 5% 10%;
+			@media screen and (max-width: @mobile-breakpoint) {
+				padding: 5% 5% 80%;
+				text-align: center;
+			}
 		}
+	}
 
+}
+
+//  Native layout tweaks
+[data-module="contentLayout"] {
+	.background {
+		&:before {
+			content: none!important;
+		}
+	}
+	.bcrumb {
+		.breadcrumb-item {
+			color: inherit;
+			&.active:after {
+				background-color: currentColor;
+			}
+			a {
+				color: inherit;
+			}
+		}
+	}
+	.notcritical .container {
+		margin-top: 0!important;
+		.leftcol {
+			font-family: museosans;
+			font-weight: normal;
+		}
+		.rightcol {
+			> h1 {
+				display: none;
+			}
+		}
+	}
+}
+
+[data-module="leftSiblingMenu"] {
+	.minus {
+		&:before {
+			content: none!important;
+		}
+	}
+	.slide.plus {
+		order: 1;
+		margin-left: auto;
 	}
 }

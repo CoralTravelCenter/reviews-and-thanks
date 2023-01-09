@@ -185,27 +185,6 @@
   color: white;
   background-color: #D7232A;
 }
-body .contentLayout-BaseContainer {
-  max-width: 100%;
-  overflow: hidden;
-}
-body .contentLayout-BaseContainer .notcritical {
-  padding: 0!important;
-}
-body .contentLayout-BaseContainer .notcritical > .container {
-  margin: 0!important;
-  padding: 0!important;
-  max-width: none!important;
-}
-body .contentLayout-BaseContainer .notcritical > .container .widgetcontainer {
-  margin-bottom: 0;
-}
-body .contentLayout-BaseContainer .notcritical > .container > .row:not(:nth-child(2)) {
-  display: none;
-}
-body > div.contentLayout-BaseContainer > div.notcritical > div > div:nth-child(2) > div.col-sm-12.order-1.col-md-9.rightcol > h1 {
-  display: none;
-}
 @font-face {
   font-family: 'museosans';
   font-weight: 900;
@@ -237,4 +216,100 @@ body > div.contentLayout-BaseContainer > div.notcritical > div > div:nth-child(2
 #site-wrap h5,
 #site-wrap h6 {
   font-weight: bold;
+}
+#site-wrap .kv {
+  position: relative;
+  background: url("../iii/kv-desktop.jpg") center no-repeat;
+  background-size: cover;
+  border-radius: 1.5em;
+}
+#site-wrap .kv:before {
+  content: '';
+  display: block;
+  padding-top: 36.13138686%;
+}
+#site-wrap .kv > * {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 768px) {
+  #site-wrap .kv {
+    position: relative;
+    background-image: url(../iii/kv-mobile.jpg);
+  }
+  #site-wrap .kv:before {
+    content: '';
+    display: block;
+    padding-top: 120%;
+  }
+  #site-wrap .kv > * {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+#site-wrap .kv > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: bold;
+  color: black;
+  padding: 5% 60% 5% 10%;
+}
+@media screen and (max-width: 1439px) {
+  #site-wrap .kv > div {
+    font-size: 33.33333333px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  #site-wrap .kv > div {
+    font-size: 3.33333333vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  #site-wrap .kv > div {
+    font-size: 8.33333333vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  #site-wrap .kv > div {
+    padding: 5% 5% 80%;
+    text-align: center;
+  }
+}
+[data-module="contentLayout"] .background:before {
+  content: none!important;
+}
+[data-module="contentLayout"] .bcrumb .breadcrumb-item {
+  color: inherit;
+}
+[data-module="contentLayout"] .bcrumb .breadcrumb-item.active:after {
+  background-color: currentColor;
+}
+[data-module="contentLayout"] .bcrumb .breadcrumb-item a {
+  color: inherit;
+}
+[data-module="contentLayout"] .notcritical .container {
+  margin-top: 0!important;
+}
+[data-module="contentLayout"] .notcritical .container .leftcol {
+  font-family: museosans;
+  font-weight: normal;
+}
+[data-module="contentLayout"] .notcritical .container .rightcol > h1 {
+  display: none;
+}
+[data-module="leftSiblingMenu"] .minus:before {
+  content: none!important;
+}
+[data-module="leftSiblingMenu"] .slide.plus {
+  order: 1;
+  margin-left: auto;
 }
