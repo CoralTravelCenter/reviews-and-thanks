@@ -31,28 +31,53 @@ window.preload = (what, fn) ->
     what = [what] unless  Array.isArray(what)
     $.when.apply($, ($.ajax(lib, dataType: 'script', cache: true) for lib in what)).done -> fn?()
 
-window.queryParam = queryParam = (p, nocase) ->
-    params_kv = location.search.substr(1).split('&')
-    params = {}
-    params_kv.forEach (kv) -> k_v = kv.split('='); params[k_v[0]] = k_v[1] or ''
-    if p
-        if nocase
-            return decodeURIComponent(params[k]) for k of params when k.toUpperCase() == p.toUpperCase()
-            return undefined
-        else
-            return decodeURIComponent params[p]
-    params
-
-String::zeroPad = (len, c) ->
-    s = ''
-    c ||= '0'
-    len ||= 2
-    len -= @length
-    s += c while s.length < len
-    s + @
-Number::zeroPad = (len, c) -> String(@).zeroPad len, c
 
 #window.DEBUG = 'APP NAME'
 
 ASAP ->
+    libs = [
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/perfect-scrollbar.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.3/jquery.scrollTo.min.js'
+    ]
+    $libsReady = $.Deferred()
+    preload libs, -> $libsReady.resolve()
+
     $(document).on 'click', '.leftSiblingMenu .slide.plus', () -> $(this).toggleClass('open')
+
+    $all_reviews = $('.all-reviews')
+    $all_reviews.html $('script[type="all/reviews"]').html()
+    $reviews = $all_reviews.children()
+    years = {}
+    $reviews.each (idx, el) ->
+        $el = $(el)
+        y = moment($el.find('.date').text(), 'DD.MM.YYYY').year()
+        years[y] = yes
+        $el.attr 'data-year', y
+    years_nav = Object.keys(years).sort().reverse()
+    $('.annual-nav').html years_nav.map((y) -> "<button data-nav-year='#{y}'>#{y}</button>")
+    $reviews.slice(0, 5).addClass('shown')
+
+    o = new IntersectionObserver (entries, observer) ->
+        for entry in entries
+            if entry.isIntersecting
+                observer.unobserve entry.target
+                $next = $(entry.target).next()
+                if $next.get(0)
+                    $next.show()
+                    setTimeout ->
+                        $next.addClass('shown')
+                    , 250
+                    observer.observe $next.get(0)
+    , threshold: .5
+    o.observe $('.review-block.shown:last').get(0)
+
+    $.when($libsReady).done ->
+        $(document).on 'click', '[data-nav-year]', (e) ->
+            y = $(this).attr('data-nav-year')
+            $anchor = $("[data-year=#{y}]").eq(0)
+            $anchor.addClass('shown').prevAll().addClass('shown')
+            setTimeout ->
+                o.observe $('.review-block.shown:last').get(0)
+                $(window).scrollTo $anchor, 500, offset: -200
+            , 100
+
