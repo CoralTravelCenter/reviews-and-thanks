@@ -71,6 +71,13 @@ ASAP ->
     , threshold: .5
     o.observe $('.review-block.shown:last').get(0)
 
+    mo = new MutationObserver (mutations_list, observer) ->
+        searchWidgetIsSticky = _.find mutations_list, (mutation) -> mutation.target.classList.contains('sticky')
+        $('.notcritical').css paddingTop: searchWidgetIsSticky and 90 or 20
+
+    $('.container-tabItem').each (idx, el) ->
+        mo.observe el, attributes: yes, attributeFilter: ['class']
+
     $.when($libsReady).done ->
         $(document).on 'click', '[data-nav-year]', (e) ->
             y = $(this).attr('data-nav-year')

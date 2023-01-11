@@ -79,7 +79,7 @@ window.preload = function(what, fn) {
 };
 
 ASAP(function() {
-  var $all_reviews, $libsReady, $reviews, libs, o, years, years_nav;
+  var $all_reviews, $libsReady, $reviews, libs, mo, o, years, years_nav;
   libs = ['https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/perfect-scrollbar.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.3/jquery.scrollTo.min.js'];
   $libsReady = $.Deferred();
   preload(libs, function() {
@@ -130,6 +130,21 @@ ASAP(function() {
     threshold: .5
   });
   o.observe($('.review-block.shown:last').get(0));
+  mo = new MutationObserver(function(mutations_list, observer) {
+    var searchWidgetIsSticky;
+    searchWidgetIsSticky = _.find(mutations_list, function(mutation) {
+      return mutation.target.classList.contains('sticky');
+    });
+    return $('.notcritical').css({
+      paddingTop: searchWidgetIsSticky && 90 || 20
+    });
+  });
+  $('.container-tabItem').each(function(idx, el) {
+    return mo.observe(el, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  });
   return $.when($libsReady).done(function() {
     return $(document).on('click', '[data-nav-year]', function(e) {
       var $anchor, y;
